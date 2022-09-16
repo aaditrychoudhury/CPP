@@ -1,0 +1,51 @@
+#include <bits/stdc++.h> 
+
+bool isSafe(int newX,int newY,int n,vector<vector<int>> &arr,vector<vector<bool>> &vis){
+    if((newX>=0 && newX<n) && (newY>=0 && newY<n) && arr[newX][newY] == 1 && vis[newX][newY] != 1){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+void solve(int x,int y,int n,vector<vector<int>> &arr,vector<vector<bool>> &vis,vector<string> &ans,string path){
+    
+    //base case
+    if(x == n-1 && y==n-1){
+        ans.push_back(path);
+        return;
+    }
+    
+    vis[x][y] = 1;
+    //for d
+    if(isSafe(x+1,y,n,arr,vis)){
+        solve(x+1,y,n,arr,vis,ans,path+'D');
+    }
+    //for l
+    if(isSafe(x,y-1,n,arr,vis)){
+        solve(x,y-1,n,arr,vis,ans,path+'L');
+    }
+    //for r
+    if(isSafe(x,y+1,n,arr,vis)){
+        solve(x,y+1,n,arr,vis,ans,path+'R');
+    }
+    //for u
+    if(isSafe(x-1,y,n,arr,vis)){
+        solve(x-1,y,n,arr,vis,ans,path+'U');
+    }
+    vis[x][y] =0;
+}
+
+vector < string > searchMaze(vector < vector < int >> & arr, int n) {
+    // Write your code here.
+    vector<string> ans;
+    vector<vector<bool>> visited(n,vector<bool> (n,0));
+    string path="";
+    
+    if(arr[0][0] == 0){
+        return ans;
+    }
+    solve(0,0,n,arr,visited,ans,path);
+    return ans;
+}
