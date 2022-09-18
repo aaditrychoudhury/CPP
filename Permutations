@@ -1,0 +1,30 @@
+class Solution {
+    
+    
+    private:
+    
+        void solve(vector<int> num,vector<vector<int>> &ans,int index){
+            //base case
+            if(index >= num.size()){
+                ans.push_back(num);
+                return;
+            }
+            
+            for(int i = index;i<num.size();++i){
+                //swap function in stl 
+                swap(num[index],num[i]);
+                //call recursion
+                solve(num,ans,index+1);
+                //backtracking as we need this as we are making changes in                   //the same vector and we want our vector that when it is                    //returned it should be in consistent state so we are swapping
+                swap(num[index],num[i]);
+            }
+        }    
+    
+public:
+    vector<vector<int>> permute(vector<int>& nums) {
+        vector<vector<int>> ans;
+        int index=0;
+        solve(nums,ans,index);
+        return ans;
+    }
+};
