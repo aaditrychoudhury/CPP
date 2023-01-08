@@ -1,0 +1,77 @@
+//{ Driver Code Starts
+#include <bits/stdc++.h>
+
+using namespace std;
+
+
+// } Driver Code Ends
+//User function template for C++
+class Solution{
+public:
+	int search(string pat, string txt) {
+	    // code here
+	    int ans=0;
+	    int i=0,j=0;
+	    unordered_map<char,int> m,m1;
+	    int k = pat.length();
+	   // for(long int i=0;i<k;++i){
+	   //     char s = pat[i];
+	   //     m[s]++;
+	   // }
+	   for(auto x:pat){
+	       m[x]++;
+	   }
+	    //int count = m.size();
+	    int n = txt.length();
+	    while(j<n){
+	        //for calculation
+	        //m[txt[j]]--;
+	       // if(m[txt[j]] == 0){
+	       //     count--;
+	       // } 
+	       m1[txt[j]]++;
+	        if(j-i+1 < k)
+	            ++j;
+	        else if(j-i+1 == k){
+	            //for count the ans
+	           // if(count == 0)
+	           //     ++ans;
+	           if(m==m1)ans+=1;
+	           
+	                //for slide the window
+	                
+	           // m[txt[i]]++;
+	           // if(m[txt[i]] > 0){
+	           //     count++;
+	           // }
+	           m1[txt[i]]--;
+	           if(m1[txt[i]] == 0){
+	               m1.erase(txt[i]);
+	           }
+	                
+	           
+	            i++;
+	            j++;
+	        }
+	       
+	    }
+	    return ans;
+	}
+
+};
+
+//{ Driver Code Starts.
+
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        string pat, txt;
+        cin >> txt >> pat;
+        Solution ob;
+        auto ans = ob.search(pat, txt);
+        cout << ans << "\n";
+    }
+    return 0;
+}
+// } Driver Code Ends
