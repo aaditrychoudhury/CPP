@@ -1,0 +1,27 @@
+class Solution {
+public:
+    string minWindow(string s, string t) {
+        int arr[128]={};
+        for(auto i:t) arr[i]++;
+
+        int i=0,j=0,counter=t.size(),n=s.size(),len=INT_MAX,start=0;
+
+        while(j<n){
+            if(arr[s[j]] > 0) counter--;
+            arr[s[j]]--;
+
+            while(counter == 0){
+                if(len>j-i+1){
+                    len = j-i+1;
+                    start=i;
+                }
+                //slide the window
+                arr[s[i]]++;
+                if(arr[s[i]] > 0) counter++;
+                ++i;
+            }++j;
+        }
+        return len == INT_MAX ? "" : s.substr(start,len);
+        
+    }
+};
