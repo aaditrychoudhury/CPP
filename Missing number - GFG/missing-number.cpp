@@ -26,18 +26,8 @@ int main()
 int missingNumber(int A[], int N)
 {
     // Your code goes here
-    int dum[N+1]={0};
-    int ans=-1;
-    int j;
-    for(int i=0;i<N-1;++i){
-        j =A[i];
-        dum[j]=1;
-    }
-    for(int i=1;i<=N;++i){
-        if(dum[i] == 0){
-            ans=i;
-            break;
-        }
-    }
-    return ans;
+    int total=(N*(N+1))/2;
+    int sum=0;
+    for(int i=0;i<N-1;++i) sum+=A[i];
+    return total-sum;
 }
