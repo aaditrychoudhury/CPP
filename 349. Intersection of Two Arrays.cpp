@@ -7,7 +7,7 @@ public:
         //int k;
         set<int> st;
         for(int i=0;i<n;++i){
-            //if(mp[nums1[i]] != 1)mp[nums1[i]]++;
+            //if(mp[nums1[i]] != 1)mp[nums1[i]]++;fsablkj
             st.insert(nums1[i]);
         }
         set<int> st2;
